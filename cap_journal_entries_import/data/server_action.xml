@@ -26,7 +26,7 @@
         'journal_id':record.journal_id.id,
         'ref':record.name,
         'line_ids':journal_lines,
-        'name':False
+        'name':record.name,
     })
 
     newJournalEntry.action_post()

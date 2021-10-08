@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime, timedelta
-from odoo import api, fields, models, _
+from odoo import api, fields, models
 
 
 class ImportItem(models.Model):

@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+  <record id="import_entries_server_action" model="ir.action.server">
+        <field name="name">CAP_ Import entries</field>
+        <field name="model_id" ref="account.import.entry"></field>
+        <field name="state">code</field>
+        <field>for record in records:
+    journal_lines=[]
+    for line in record.journal_item_ids:
+      journal_lines.append((0, 0, {
+    'account_id' : line.account_id.id,
+    'product_id' : line.product_id.id,
+    'price_unit' : line.price_unit,
+    'quantity' : line.quantity,
+    'debit': line.debit,
+    'credit': line.credit,
+    'partner_id':record.contact_id.id
+  }))
+
+    newJournalEntry=env['account.move'].create({
+        'partner_id':record.contact_id.id,
+        'date':record.date,
+        'invoice_date_due':record.due_date,
+        'journal_id':record.journal_id.id,
+        'ref':record.name,
+        'line_ids':journal_lines,
+        'name':False
+    })
+
+    newJournalEntry.action_post()
+    record['transferred']=True
+        </field>
+
+  </record>
+  <record id="import_entries_deletion" model="ir.action.server">
+        <field name="name">CAP_ Import entries deletion</field>
+        <field name="model_id" ref="account.import.entry"></field>
+        <field name="state">code</field>
+        <field>
+for record in records:
+    delete = env['account.import.entry'].search([('id','=',record.id)])
+    delete.unlink()
+        </field>
+
+  </record>
+</odoo>

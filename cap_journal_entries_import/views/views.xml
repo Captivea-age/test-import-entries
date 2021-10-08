@@ -1,0 +1,63 @@
+<odoo>
+    <data>
+
+        <record id="view_import_journal_tree" model="ir.ui.view">
+            <field name="name">account.import.entry.tree</field>
+            <field name="model">account.import.entry</field>
+            <field name="arch" type="xml">
+                <tree string="Journal entries to be imported">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="due_date" />
+                    <field name="journal_id" />
+                    <field name="journal_item_ids" />
+                    <field name="contact_id" />
+                    <field name="transferred" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_import_items_tree" model="ir.ui.view">
+            <field name="name">account.import.entry.item</field>
+            <field name="model">account.import.item</field>
+            <field name="arch" type="xml">
+                <tree string="Joural items to be imported">
+                    <field name="name"/>
+                    <field name="import_entry_id"/>
+                    <field name="partner_id"/>
+                    <field name="active" />
+                    <field name="currency_id" />
+                    <field name="account_id" />
+                    <field name="debit" />
+                    <field name="credit" />
+                    <field name="journal_entry_id" />
+                    <field name="product_id" />
+                    <field name="price_unit" />
+                    <field name="quantity" />
+                    <field name="fully_imported" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="import_entry_action" model="ir.actions.act_window">
+            <field name="name">Import entry action</field>
+            <field name="res_model">account.import.entry</field>
+            <field name="view_mode">tree</field>
+        </record>
+        <record id="import_item_action" model="ir.actions.act_window">
+            <field name="name">Import item action</field>
+            <field name="res_model">account.import.item</field>
+            <field name="view_mode">tree</field>
+        </record>
+
+        <menuitem id="menu_import_entry" name="Import entries"
+          parent="" sequence="0"
+          action="import_entry_action" />
+
+        <menuitem id="menu_import_item" name="Import items"
+          parent="menu_import_entry" sequence="1"
+          action="import_item_action" />
+
+
+    </data>
+</odoo>

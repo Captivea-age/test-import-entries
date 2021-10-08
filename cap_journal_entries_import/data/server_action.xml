@@ -16,9 +16,9 @@
     'quantity' : line.quantity,
     'debit': line.debit,
     'credit': line.credit,
-    'partner_id':record.contact_id.id
+    'partner_id':record.contact_id.id,
     'name':record.name,
-    
+
   }))
 
     newJournalEntry=env['account.move'].create({

@@ -17,7 +17,7 @@
     'debit': line.debit,
     'credit': line.credit,
     'partner_id':record.contact_id.id,
-    'name':record.name,
+    'name':line.name,
 
   }))
 
